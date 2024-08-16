@@ -4,13 +4,15 @@ import "../Scrollbar/scrollbar.css";
 import MultiItemCarousel from "./MultiItemCarousel";
 import RestaurantCard from "../Restaurant/RestaurantCard";
 import { Auth } from "../Auth/Auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllRestaurantsAction } from "../State/Restaurant/Action";
 
-const restaurant = [1, 1, 1, 1, 1, 1, 1, 1];
+const restaurants = [1, 1, 1, 1, 1, 1, 1, 1];
 const Home = () => {
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
+  const { restaurant } = useSelector((store) => store);
+  console.log("Restaurant ", restaurant);
   useEffect(() => {
     dispatch(getAllRestaurantsAction(jwt));
   }, []);
@@ -37,8 +39,8 @@ const Home = () => {
           Order From Our Handpicked Favorites
         </h1>
         <div className="flex flex-wrap items-center justify-around gap-5">
-          {restaurant.map((item) => (
-            <RestaurantCard />
+          {restaurant.restaurants.map((item) => (
+            <RestaurantCard item={item}/>
           ))}
         </div>
       </section>

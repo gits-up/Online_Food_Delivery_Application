@@ -7,7 +7,7 @@ export const OrderCard = () => {
       <div className="flex items-center space-x-5">
         <img
           className="h-16 w-16"
-          src="https://norecipes.com/wp-content/uploads/2017/05/chicken-biryani-12-1200x1799.jpg"
+          src="https://cdn.pixabay.com/photo/2023/10/19/11/18/biryani-8326234_1280.jpg"
           alt=""
         />
 

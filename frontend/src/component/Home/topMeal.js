@@ -20,7 +20,7 @@ export const TopMeals = [
         title: "Cake"
     },
     {
-        image: "https://norecipes.com/wp-content/uploads/2017/05/chicken-biryani-12-1200x1799.jpg",
+        image: "https://cdn.pixabay.com/photo/2023/10/19/11/18/biryani-8326234_1280.jpg",
         title: "Biryani"
     },
     {
