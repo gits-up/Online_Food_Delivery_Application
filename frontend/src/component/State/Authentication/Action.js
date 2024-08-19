@@ -49,6 +49,7 @@ export const loginUser = (reqData) => async (dispatch) => {
       reqData.navigate("/admin/restaurant");
     } else {
       reqData.navigate("/");
+      // window.location.reload(); //I added this to reload restaurants
     }
     dispatch({ type: LOGIN_SUCCESS, payload: data.jwt });
     console.log("Login success", data);

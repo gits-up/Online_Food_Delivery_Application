@@ -11,8 +11,10 @@ import React from "react";
 import { CartItem } from "./CartItem";
 import { AddressCard } from "./AddressCard";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
-import "../Scrollbar/scrollbar.css"
+import "../Scrollbar/scrollbar.css";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import { createOrder } from "../State/Order/Action";
 // import * as Yup from "yup";
 
 export const style = {
@@ -39,21 +41,37 @@ const initialValues = {
 //   city: Yup.string().required("city is required"),
 // });
 
-const items = [1, 1];
 const Cart = () => {
   const createOrderUsingSelectedAddress = () => {};
   const handleOpenAddressModal = () => setOpen(true);
   const [open, setOpen] = React.useState(false);
+  const { cart, auth } = useSelector((store) => store);
+  const dispatch = useDispatch();
   const handleClose = () => setOpen(false);
   const handleSubmit = (values) => {
-    console.log("form value ", values)
+    const data = {
+      jwt: localStorage.getItem("jwt"),
+      order: {
+        restaurantId: cart.cartItems[0].food?.restaurant.id,
+        deliveryAddress: {
+          fullName: auth.user?.fullName,
+          streetAddress: values.streetAddress,
+          city: values.city,
+          state: values.state,
+          postalCode: values.pincode,
+          country: "India", //default India
+        }
+      }
+    }
+    dispatch(createOrder(data));
+    console.log("form value ", values);
   };
   return (
     <>
       <main className="lg:flex justify-between">
         <section className="lg:w-[30%] space-y-6 lg:min-h-screen pt-10">
-          {items.map((item) => (
-            <CartItem />
+          {cart.cartItems.map((item) => (
+            <CartItem item={item}/>
           ))}
           <Divider />
           <div className="billDetails px-5 text-sm">
@@ -61,7 +79,7 @@ const Cart = () => {
             <div className="space-y-3">
               <div className="flex justify-between text-gray-400">
                 <p>Item Total</p>
-                <p>Rs. 599</p>
+                <p>Rs. {cart.cart?.total}</p>
               </div>
               <div className="flex justify-between text-gray-400">
                 <p>Delivery Fee</p>
@@ -76,7 +94,7 @@ const Cart = () => {
             </div>
             <div className="flex justify-between text-gray-400">
               <p>Total</p>
-              <p>Rs. 653</p>
+              <p>Rs. {cart.cart?.total + 33 + 21}</p> {/*total + delivery fee + gst*/}
             </div>
           </div>
         </section>
@@ -126,71 +144,78 @@ const Cart = () => {
             onSubmit={handleSubmit}
           >
             <Form>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Field
-                  as={TextField}
-                  name="streetAddress"
-                  label="Street Address"
-                  fullWidth
-                  variant="outlined"
-                  // error={!ErrorMessage("streetAddress")}
-                  // helperText={
-                  //   <ErrorMessage>
-                  //     {(msg) => <span className="text-red-600">{msg}</span>}
-                  //   </ErrorMessage>
-                  // }
-                />
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <Field
+                    as={TextField}
+                    name="streetAddress"
+                    label="Street Address"
+                    fullWidth
+                    variant="outlined"
+                    // error={!ErrorMessage("streetAddress")}
+                    // helperText={
+                    //   <ErrorMessage>
+                    //     {(msg) => <span className="text-red-600">{msg}</span>}
+                    //   </ErrorMessage>
+                    // }
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Field
+                    as={TextField}
+                    name="state"
+                    label="State"
+                    fullWidth
+                    variant="outlined"
+                    // error={!ErrorMessage("streetAddress")}
+                    // helperText={
+                    //   <ErrorMessage>
+                    //     {(msg) => <span className="text-red-600">{msg}</span>}
+                    //   </ErrorMessage>
+                    // }
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Field
+                    as={TextField}
+                    name="city"
+                    label="City"
+                    fullWidth
+                    variant="outlined"
+                    // error={!ErrorMessage("streetAddress")}
+                    // helperText={
+                    //   <ErrorMessage>
+                    //     {(msg) => <span className="text-red-600">{msg}</span>}
+                    //   </ErrorMessage>
+                    // }
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Field
+                    as={TextField}
+                    name="pincode"
+                    label="Pincode"
+                    fullWidth
+                    variant="outlined"
+                    // error={!ErrorMessage("streetAddress")}
+                    // helperText={
+                    //   <ErrorMessage>
+                    //     {(msg) => <span className="text-red-600">{msg}</span>}
+                    //   </ErrorMessage>
+                    // }
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    type="submit"
+                    color="primary"
+                  >
+                    Save Address
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <Field
-                  as={TextField}
-                  name="state"
-                  label="State"
-                  fullWidth
-                  variant="outlined"
-                  // error={!ErrorMessage("streetAddress")}
-                  // helperText={
-                  //   <ErrorMessage>
-                  //     {(msg) => <span className="text-red-600">{msg}</span>}
-                  //   </ErrorMessage>
-                  // }
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Field
-                  as={TextField}
-                  name="city"
-                  label="City"
-                  fullWidth
-                  variant="outlined"
-                  // error={!ErrorMessage("streetAddress")}
-                  // helperText={
-                  //   <ErrorMessage>
-                  //     {(msg) => <span className="text-red-600">{msg}</span>}
-                  //   </ErrorMessage>
-                  // }
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Field
-                  as={TextField}
-                  name="pincode"
-                  label="Pincode"
-                  fullWidth
-                  variant="outlined"
-                  // error={!ErrorMessage("streetAddress")}
-                  // helperText={
-                  //   <ErrorMessage>
-                  //     {(msg) => <span className="text-red-600">{msg}</span>}
-                  //   </ErrorMessage>
-                  // }
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Button fullWidth variant="contained" type="submit" color="primary">Save Address</Button>
-              </Grid>
-            </Grid>
             </Form>
           </Formik>
         </Box>

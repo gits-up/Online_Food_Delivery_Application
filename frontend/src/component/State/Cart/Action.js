@@ -24,13 +24,15 @@ export const findCart = (token) => {
   return async (dispatch) => {
     dispatch({ type: FIND_CART_REQUEST });
     try {
-      const response = await api.get(`/api/cart/`, {
+      const response = await api.get(`/api/cart`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log("My cart ", response.data);
       dispatch({ type: FIND_CART_SUCCESS, payload: response.data });
     } catch (error) {
+      console.log("Error ", error);
       dispatch({ type: FIND_CART_FAILURE, payload: error });
     }
   };

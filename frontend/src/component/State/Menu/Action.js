@@ -1,4 +1,4 @@
-import { api } from '../../config/api'
+import { api } from "../../config/api";
 
 import {
   CREATE_MENU_ITEM_FAILURE,
@@ -54,6 +54,7 @@ export const getMenuItemsByRestaurantId = (reqData) => {
         payload: data,
       });
     } catch (error) {
+      console.log("Catch error ", error);
       dispatch({
         type: GET_MENU_ITEMS_BY_RESTAURANT_ID_FAILURE,
         payload: error,

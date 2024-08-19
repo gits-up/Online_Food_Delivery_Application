@@ -7,8 +7,11 @@ import {
   FormControlLabel,
   FormGroup,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { categorizeIngredients } from "../util/categorizeIngredients";
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "../State/Cart/Action";
 
 const demo = [
   {
@@ -20,10 +23,33 @@ const demo = [
     ingredient: ["Chicken", "Paneer"],
   },
 ];
-const MenuCard = () => {
-    const handleCheckBoxChange = (value) => {
-        console.log("value")
+const MenuCard = ({ item }) => {
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const dispatch = useDispatch();
+
+  const handleCheckBoxChange = (itemName) => {
+    console.log("value", itemName);
+    if (selectedIngredients.includes(itemName)) {
+      setSelectedIngredients(
+        selectedIngredients.filter((item) => item !== itemName)
+      );
+    } else {
+      setSelectedIngredients([...selectedIngredients, itemName]);
     }
+  };
+  const handleAddItemToCart = (e) => {
+    e.preventDefault();
+    const reqData = {
+      token: localStorage.getItem("jwt"),
+      cartItem: {
+        foodId: item.id,
+        quantity: 1,
+        ingredients: selectedIngredients,
+      },
+    };
+    dispatch(addItemToCart(reqData));
+    console.log("Req data ", reqData);
+  };
   return (
     <Accordion>
       <AccordionSummary
@@ -35,38 +61,46 @@ const MenuCard = () => {
           <div className="lg:flex items-center lg:gap-5">
             <img
               className="w-[7rem] h-[7rem] object-cover"
-              src="http://res.cloudinary.com/dcpesbd8q/image/upload/v1708317657/no8xfzdhsrdy4ezmcczr.jpg"
+              src={item.images[0]}
               alt=""
             />
             <div className="space-y-1 lg:space-y-5 lg:max-w-2xl">
-              <p className="font-semibold text-xl">Burger</p>
-              <p>Rs. 299</p>
-              <p className="text-gray-400">
-                A hamburger, or simply a burger, is a dish consisting of
-                fillings—usually a patty of ground meat, typically beef—placed
-                inside a sliced bun or bread roll.
-              </p>
+              <p className="font-semibold text-xl">{item.name}</p>
+              <p>Rs. {item.price}</p>
+              <p className="text-gray-400">{item.description}</p>
             </div>
           </div>
         </div>
       </AccordionSummary>
       <AccordionDetails>
-        <form>
+        <form onSubmit={handleAddItemToCart}>
           <div className="flex gap-5 flex-wrap">
-            {demo.map((item) => (
-              <div>
-                <p>{item.category}</p>
-                <FormGroup>
-                  {item.ingredient.map((item) => (
-                    <FormControlLabel control={<Checkbox onChange={()=>handleCheckBoxChange(item)}/>} label={item} />
-                  ))}
-                </FormGroup>
-              </div>
-            ))}
+            {Object.keys(categorizeIngredients(item.ingredients)).map(
+              (category) => (
+                <div>
+                  <p>{category}</p>
+                  <FormGroup>
+                    {categorizeIngredients(item.ingredients)[category].map(
+                      (item) => (
+                        <FormControlLabel
+                          key={item.id}
+                          control={
+                            <Checkbox
+                              onChange={() => handleCheckBoxChange(item.name)}
+                            />
+                          }
+                          label={item.name}
+                        />
+                      )
+                    )}
+                  </FormGroup>
+                </div>
+              )
+            )}
           </div>
           <div className="pt-5">
             <Button variant="contained" disabled={false} type="submit">
-                {true?"Add To Cart":"Out Of Stock"}
+              {true ? "Add To Cart" : "Out Of Stock"}
             </Button>
           </div>
         </form>

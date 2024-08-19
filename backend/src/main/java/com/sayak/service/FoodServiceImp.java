@@ -1,5 +1,6 @@
 package com.sayak.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,6 +32,7 @@ public class FoodServiceImp implements FoodService {
         food.setIngredients(req.getIngredients());
         food.setSeasonal(req.isSeasonal());
         food.setVegeterian(req.isVegeterian());
+        food.setCreationDate(new Date());
         Food savedFood = foodRespository.save(food);
         restaurant.getFoods().add(savedFood);
         return savedFood;
