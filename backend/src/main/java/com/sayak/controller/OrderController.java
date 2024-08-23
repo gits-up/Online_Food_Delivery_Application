@@ -17,6 +17,8 @@ import com.sayak.model.User;
 import com.sayak.request.OrderRequest;
 import com.sayak.service.OrderService;
 import com.sayak.service.UserService;
+import com.sayak.service.PaymentService;
+import com.sayak.response.PaymentResponse;
 
 @RestController
 @RequestMapping("/api")
@@ -25,14 +27,19 @@ public class OrderController {
     private OrderService orderService;
 
     @Autowired
+    private PaymentService paymentService;
+
+    @Autowired
     private UserService userService;
 
     @PostMapping("/order")
-    public ResponseEntity<Order> createOrder(@RequestBody OrderRequest req, @RequestHeader("Authorization") String jwt)
+    public ResponseEntity<PaymentResponse> createOrder(@RequestBody OrderRequest req,
+            @RequestHeader("Authorization") String jwt)
             throws Exception {
         User user = userService.findUserByJwtToken(jwt);
         Order order = orderService.createOrder(req, user);
-        return new ResponseEntity<>(order, HttpStatus.CREATED);
+        PaymentResponse res = paymentService.createPaymentLink(order);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @GetMapping("/order/user")
