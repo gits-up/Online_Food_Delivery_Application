@@ -67,11 +67,11 @@ export const RestaurantDetails = () => {
                 <p className="text-gray-400">
                   <span className="pr-5">-</span>
                   {true ? (
-                    <span className="px-5 py-2 rounded-full bg-green-400 text-gray-950">
+                    <span className="px-5 py-1 rounded-full bg-green-400 text-gray-950">
                       Open
                     </span>
                   ) : (
-                    <span className="px-5 py-2 rounded-full bg-red-400 text-gray-950">
+                    <span className="px-5 py-1 rounded-full bg-red-400 text-gray-950">
                       Closed
                     </span>
                   )}
