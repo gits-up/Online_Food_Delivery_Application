@@ -125,7 +125,7 @@ export const updateRestaurant = ({ restaurantId, restaurantData, jwt }) => {
     dispatch({ type: UPDATE_RESTAURANT_REQUEST });
     try {
       const res = await api.put(
-        `api/admin/restaurant/${restaurantId}`,
+        `api/admin/restaurants/${restaurantId}`,
         restaurantData,
         {
           headers: {
@@ -144,7 +144,7 @@ export const deleteRestaurant = ({ restaurantId, jwt }) => {
   return async (dispatch) => {
     dispatch({ type: DELETE_RESTAURANT_REQUEST });
     try {
-      const res = await api.delete(`/api/admin/restaurant/${restaurantId}`, {
+      const res = await api.delete(`/api/admin/restaurants/${restaurantId}`, {
         headers: {
           Authorization: `Bearer ${jwt}`,
         },
