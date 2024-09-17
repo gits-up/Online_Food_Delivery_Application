@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import CreateFoodCategoryForm from "./CreateFoodCategoryForm";
+import { useDispatch, useSelector } from "react-redux";
 
 const orders = [1, 1, 1, 1, 1, 1, 1];
 
@@ -31,9 +32,12 @@ const style = {
 };
 
 export default function FoodCategoryTable() {
+  const { restaurant } = useSelector((store) => store);
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  console.log("Restaurant Details", restaurant);
   return (
     <Box>
       <Card className="mt-1">
