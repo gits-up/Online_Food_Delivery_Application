@@ -10,10 +10,21 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRestaurantsOrder } from "../../component/State/Restaurant Order/Action";
 
 const orders = [1, 1, 1, 1, 1, 1, 1];
 export default function OrderTable() {
+  const dispatch = useDispatch();
+  const jwt = localStorage.getItem("jwt");
+  const { restaurant, ingredients, menu } = useSelector((store) => store);
+  useEffect(() => {
+    dispatch(fetchRestaurantsOrder({
+      jwt,
+      restaurantId: restaurant.usersRestaurant?.id
+    }))
+  },[])
   return (
     <Box>
       <Card className="mt-1">
@@ -32,7 +43,7 @@ export default function OrderTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {orders.map((row) => (
+              {restaurantOrder.orders.map((row) => (
                 <TableRow
                   key={row.name}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
