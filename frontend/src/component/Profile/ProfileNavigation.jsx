@@ -41,7 +41,7 @@ export const ProfileNavigation = ({ open, handleClose }) => {
         anchor="left"
         sx={{ zIndex: -1, position: "sticky" }}
       >
-        <div className="w-[50vw] lg:w-[20vw] h-[100vh] flex flex-col justify-center text-xl gap-8 pt-10">
+        <div className="w-[50vw] lg:w-[20vw] h-[100vh] flex flex-col justify-center text-xl gap-4 pt-16">
           {menu.map((item, i) => (
             <>
               <div
