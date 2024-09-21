@@ -1,5 +1,4 @@
 # Online_Food_Delivery_Application
-# Online Food Delivery Project
 
 ### Technology (mern)
 
