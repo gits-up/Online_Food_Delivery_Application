@@ -1,5 +1,7 @@
 # Online_Food_Delivery_Application
 
+#### Note: To run in local machine change api.js localhost location with the commented one.
+
 ### Technology (mern)
 
 - React
