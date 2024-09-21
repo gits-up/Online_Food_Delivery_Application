@@ -8,7 +8,7 @@
 - express js
 - role base access (ROLE_CUSTOMER, ROLE_RESTAURANT_OWNER)
 - nodemailer
-- jeson web token
+- json web token
 - mongoDB(Data base)
 - Tailwind css
 - Mui (css component library)
