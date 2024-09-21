@@ -39,7 +39,8 @@ public class AppConfig {
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                 CorsConfiguration cfg = new CorsConfiguration();
                 cfg.setAllowedOrigins(Arrays.asList(
-                        "https://cloud-food.vercel.app/",
+                        "https://cloud-food-gitsup.vercel.app/",
+                        "https://cloud-food-kappa.vercel.app/",
                         "http://localhost:3000"));
                 cfg.setAllowedMethods(Collections.singletonList("*"));
                 cfg.setAllowCredentials(true);
