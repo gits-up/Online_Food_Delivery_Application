@@ -14,7 +14,7 @@
 - Mui (css component library)
 - Redux (State managment library)
 - Axios
-- strip payment gatway
+- stripe payment gateway
 
 ### Tools
 
