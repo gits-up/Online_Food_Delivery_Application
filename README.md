@@ -177,39 +177,7 @@
             totalPrice;
         }
         ```
-        
-    
-
-# Folder Stucture
-
-project_root/
-│
-├── src/
-│   ├── controllers/        // Controllers handle request/response logic
-│   │   ├── itemController.js
-│   │   └── ...
-│   │
-│   ├── models/            // Database models/schema
-│   │   ├── itemModel.js
-│   │   └── ...
-│   │
-│   ├── routes/            // API routes
-│   │   ├── itemRoutes.js
-│   │   └── ...
-│   │
-│   ├── services/          // Business logic and data processing
-│   │   ├── itemService.js
-│   │   └── ...
-│   │
-│   └── app.js             // Entry point of the application
-│
-├── .env                   // Environment variables
-├── package.json           // Project dependencies and metadata
-└── ...
-
-- spring boot
-    
-    ### Technology
+     ### Technology
     
     - React
     - Spring boot
