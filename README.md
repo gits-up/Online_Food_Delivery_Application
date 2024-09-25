@@ -1,3 +1,10 @@
+# HACKTOBERFEST 2024
+
+This is an online food delivery system with stripe payment and cloudinary ( for admin panel photo upload ), you can update the functionality of buttons because it is not fully functional yet :( DONOT CHANGE THE CORE DESIGN OF FRONTEND also the frontend is hosted on vercel you can see but the backend is deployed in railway.app but the domain generated link is not working even though a Dockerfile is added and MySQL variables are provided there. the stripe payment is working but after payment success there is whitelabel error so you can look into that too. Happy Contributing and good luck to all for hacktoberfest :)
+
+
+
+
 # Online_Food_Delivery_Application
 
 
