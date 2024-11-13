@@ -3,16 +3,12 @@
 
 ### Technology (mern)
 
-- React
-- node js
-- express js
+- react
 - role base access (ROLE_CUSTOMER, ROLE_RESTAURANT_OWNER)
-- nodemailer
 - json web token
 - mySQL(Database)
 - Tailwind css
 - Mui (css component library)
-- Redux (State managment library)
 - Axios
 - stripe payment gateway
 
@@ -183,7 +179,6 @@
     - Spring boot
     - spring security
     - role base access (ROLE_CUSTOMER, ROLE_RESTAURANT_OWNER)
-    - spring start mail
     - json web token
     - Mysql(Database)
     - Tailwind css
